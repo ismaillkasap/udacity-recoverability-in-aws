@@ -1,0 +1,26 @@
+// Minimum RTO for a single AZ outage
+Time  | Description
+01:00 | Problem happens
+01:05 | An amount of time passes before an alet triggers (5 mins.)
+01:06 | Automatically switch to second availability zone
+
+Total Time: ~10 minutes
+------------------------------------------------------------------
+// Minimum RTO for a single region outage
+Time  | Description
+01:00 | Problem happens
+01:05 | An amount of time passes before an alet triggers (5 mins.)
+00:06 | Alert triggers on-all staff (1 mins)
+00:16 | On-call staff may need to get out of bed, get to a computer, log in, log onto VPN (10 mins)
+00:26 | On-call staff starts diagnosing the issue (10 mins)
+00:36 | Root cause is discovered (10 mins)
+00:46 | Remediation started (10 mins)
+00:51 | Issue fixed (5 mins)
+
+Total Time: ~60 minutes
+------------------------------------------------------------------
+// Minimum RPO for a single AZ outage
+RDS has point in time restore available which uploads transactions every 5 minutes. So, in this case, the most data that would be lost would be 5 minutes.
+------------------------------------------------------------------
+// Minimum RPO for a single region outage
+Read replicas aim to be kept up to date with the primary DB so the read replica should have almost the same RPO as the primary DB. For some critical cases we can consider at most the RPO should be ±10 mins.
